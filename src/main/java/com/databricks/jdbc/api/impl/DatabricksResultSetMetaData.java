@@ -422,9 +422,12 @@ public class DatabricksResultSetMetaData implements ResultSetMetaData {
       } else if (columnTypeText.equalsIgnoreCase(VARIANT)) {
         columnTypeName = ColumnInfoTypeName.STRING;
         columnTypeText = VARIANT;
+      } else if (INTERVAL_TYPES.contains(columnTypeText.toUpperCase())) {
+        columnTypeName = ColumnInfoTypeName.INTERVAL;
       } else {
-        columnTypeName =
-            ColumnInfoTypeName.valueOf(metadataResultSetBuilder.stripBaseTypeName(columnTypeText));
+        columnTypeName = ColumnInfoTypeName.valueOf(
+          metadataResultSetBuilder.stripBaseTypeName(columnTypeText)
+        );
       }
 
       int columnType = DatabricksTypeUtil.getColumnType(columnTypeName);
@@ -458,7 +461,6 @@ public class DatabricksResultSetMetaData implements ResultSetMetaData {
     this.totalRows = -1;
     this.columns = columnsBuilder.build();
     this.columnNameIndex = CaseInsensitiveImmutableMap.copyOf(columnNameToIndexMap);
-    ;
   }
 
   @Override

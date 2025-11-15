@@ -55,9 +55,22 @@ public class DatabricksTypeUtil {
   public static final String STRUCT = "STRUCT";
   public static final String VARIANT = "VARIANT";
   public static final String CHAR = "CHAR";
-  public static final String INTERVAL = "INTERVAL";
   public static final String GEOMETRY = "GEOMETRY";
   public static final String GEOGRAPHY = "GEOGRAPHY";
+  public static final String INTERVAL = "INTERVAL";
+  public static final String INTERVAL_SECOND = "INTERVAL SECOND";
+  public static final String INTERVAL_MINUTE = "INTERVAL MINUTE";
+  public static final String INTERVAL_HOUR = "INTERVAL HOUR";
+  public static final String INTERVAL_DAY = "INTERVAL DAY";
+  public static final String INTERVAL_MONTH = "INTERVAL MONTH";
+  public static final String INTERVAL_YEAR = "INTERVAL YEAR";
+  public static final String INTERVAL_YEAR_TO_MONTH = "INTERVAL YEAR TO MONTH";
+  public static final String INTERVAL_DAY_TO_HOUR = "INTERVAL DAY TO HOUR";
+  public static final String INTERVAL_DAY_TO_MINUTE = "INTERVAL DAY TO MINUTE";
+  public static final String INTERVAL_DAY_TO_SECOND = "INTERVAL DAY TO SECOND";
+  public static final String INTERVAL_HOUR_TO_MINUTE = "INTERVAL HOUR TO MINUTE";
+  public static final String INTERVAL_HOUR_TO_SECOND = "INTERVAL HOUR TO SECOND";
+  public static final String INTERVAL_MINUTE_TO_SECOND = "INTERVAL MINUTE TO SECOND";
   public static final String GEOMETRY_CLASS_NAME = "com.databricks.jdbc.api.IGeometry";
   public static final String GEOGRAPHY_CLASS_NAME = "com.databricks.jdbc.api.IGeography";
   public static final String MEASURE = "measure";
@@ -74,6 +87,23 @@ public class DatabricksTypeUtil {
               ColumnInfoTypeName.TINYINT,
               ColumnInfoTypeName.BYTE,
               ColumnInfoTypeName.BIGINT));
+  public static final ArrayList<String> INTERVAL_TYPES =
+      new ArrayList<>(
+          Arrays.asList(
+              INTERVAL,
+              INTERVAL_SECOND,
+              INTERVAL_MINUTE,
+              INTERVAL_HOUR,
+              INTERVAL_DAY,
+              INTERVAL_MONTH,
+              INTERVAL_YEAR,
+              INTERVAL_YEAR_TO_MONTH,
+              INTERVAL_DAY_TO_HOUR,
+              INTERVAL_DAY_TO_MINUTE,
+              INTERVAL_DAY_TO_SECOND,
+              INTERVAL_HOUR_TO_MINUTE,
+              INTERVAL_HOUR_TO_SECOND,
+              INTERVAL_MINUTE_TO_SECOND));
 
   // only used for PreparedStatement
   public static ColumnInfoTypeName getColumnInfoType(String typeName) {
