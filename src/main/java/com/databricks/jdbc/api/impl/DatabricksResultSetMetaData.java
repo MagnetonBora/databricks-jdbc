@@ -415,16 +415,84 @@ public class DatabricksResultSetMetaData implements ResultSetMetaData {
       String columnName = columnNames.get(i);
       String columnTypeText = columnDataTypes.get(i);
 
+      // ColumnInfoTypeName columnTypeName;
+      // if (columnTypeText.equalsIgnoreCase(TIMESTAMP_NTZ)) {
+      //   columnTypeName = ColumnInfoTypeName.TIMESTAMP;
+      //   columnTypeText = TIMESTAMP;
+      // } else if (columnTypeText.equalsIgnoreCase(VARIANT)) {
+      //   columnTypeName = ColumnInfoTypeName.STRING;
+      //   columnTypeText = VARIANT;
+      // } else {
+      //   columnTypeName =
+      //       ColumnInfoTypeName.valueOf(metadataResultSetBuilder.stripBaseTypeName(columnTypeText));
+      // }
+
       ColumnInfoTypeName columnTypeName;
-      if (columnTypeText.equalsIgnoreCase(TIMESTAMP_NTZ)) {
-        columnTypeName = ColumnInfoTypeName.TIMESTAMP;
-        columnTypeText = TIMESTAMP;
-      } else if (columnTypeText.equalsIgnoreCase(VARIANT)) {
-        columnTypeName = ColumnInfoTypeName.STRING;
-        columnTypeText = VARIANT;
-      } else {
-        columnTypeName =
-            ColumnInfoTypeName.valueOf(metadataResultSetBuilder.stripBaseTypeName(columnTypeText));
+      switch (columnTypeText.toUpperCase()) {
+        case TIMESTAMP_NTZ:
+          columnTypeName = ColumnInfoTypeName.TIMESTAMP;
+          columnTypeText = TIMESTAMP;
+          break;
+        case TIMESTAMP:
+          columnTypeName = ColumnInfoTypeName.STRING;
+          columnTypeText = VARIANT;
+          break;
+        case INTERVAL_DAY_TO_SECOND:
+          columnTypeName = ColumnInfoTypeName.INTERVAL;
+          columnTypeText = INTERVAL_DAY_TO_SECOND;
+          break;
+        case INTERVAL_YEAR_TO_MONTH:
+          columnTypeName = ColumnInfoTypeName.INTERVAL;
+          columnTypeText = INTERVAL_YEAR_TO_MONTH;
+          break;
+        case INTERVAL_MONTH:
+          columnTypeName = ColumnInfoTypeName.INTERVAL;
+          columnTypeText = INTERVAL_MONTH;
+        break;
+        case INTERVAL_DAY_TO_HOUR:
+          columnTypeName = ColumnInfoTypeName.INTERVAL;
+          columnTypeText = INTERVAL_MONTH;
+        break;
+        case INTERVAL_DAY_TO_MINUTE:
+          columnTypeName = ColumnInfoTypeName.INTERVAL;
+          columnTypeText = INTERVAL_DAY_TO_MINUTE;
+        break;
+        case INTERVAL_HOUR_TO_MINUTE:
+          columnTypeName = ColumnInfoTypeName.INTERVAL;
+          columnTypeText = INTERVAL_HOUR_TO_MINUTE;
+        break;
+        case INTERVAL_HOUR_TO_SECOND:
+          columnTypeName = ColumnInfoTypeName.INTERVAL;
+          columnTypeText = INTERVAL_HOUR_TO_SECOND;
+        break;
+        case INTERVAL_MINUTE_TO_SECOND:
+          columnTypeName = ColumnInfoTypeName.INTERVAL;
+          columnTypeText = INTERVAL_MINUTE_TO_SECOND;
+        break;
+        case INTERVAL_SECOND:
+          columnTypeName = ColumnInfoTypeName.INTERVAL;
+          columnTypeText = INTERVAL_SECOND;
+        break;
+        case INTERVAL_YEAR:
+          columnTypeName = ColumnInfoTypeName.INTERVAL;
+          columnTypeText = INTERVAL_YEAR;
+        break;
+        case INTERVAL_DAY:
+          columnTypeName = ColumnInfoTypeName.INTERVAL;
+          columnTypeText = INTERVAL_DAY;
+        break;
+        case INTERVAL_HOUR:
+          columnTypeName = ColumnInfoTypeName.INTERVAL;
+          columnTypeText = INTERVAL_HOUR;
+        break;
+        case INTERVAL_MINUTE:
+          columnTypeName = ColumnInfoTypeName.INTERVAL;
+          columnTypeText = INTERVAL_MINUTE;
+        break;
+        default:
+          columnTypeName = ColumnInfoTypeName.valueOf(
+            metadataResultSetBuilder.stripBaseTypeName(columnTypeText)
+          );
       }
 
       int columnType = DatabricksTypeUtil.getColumnType(columnTypeName);
@@ -458,7 +526,6 @@ public class DatabricksResultSetMetaData implements ResultSetMetaData {
     this.totalRows = -1;
     this.columns = columnsBuilder.build();
     this.columnNameIndex = CaseInsensitiveImmutableMap.copyOf(columnNameToIndexMap);
-    ;
   }
 
   @Override
