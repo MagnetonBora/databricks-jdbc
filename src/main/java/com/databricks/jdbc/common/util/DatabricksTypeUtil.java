@@ -74,7 +74,7 @@ public class DatabricksTypeUtil {
   public static final String GEOMETRY_CLASS_NAME = "com.databricks.jdbc.api.IGeometry";
   public static final String GEOGRAPHY_CLASS_NAME = "com.databricks.jdbc.api.IGeography";
   public static final String MEASURE = "measure";
-  private static final ArrayList<ColumnInfoTypeName> SIGNED_TYPES =
+  public static final ArrayList<ColumnInfoTypeName> SIGNED_TYPES =
       new ArrayList<>(
           Arrays.asList(
               ColumnInfoTypeName.DECIMAL,
